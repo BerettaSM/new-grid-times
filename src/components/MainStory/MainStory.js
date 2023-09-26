@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+import { QUERIES } from '../../constants';
+
 const MainStory = ({
   id,
   title,
@@ -15,9 +17,9 @@ const MainStory = ({
         <Image alt={image.alt} src={image.src} />
         <Heading>{title}</Heading>
       </a>
-      <Abstract>
+      <TruncatedAbstract>
         <Location>{location}</Location> — {abstract}
-      </Abstract>
+      </TruncatedAbstract>
       <ReadMore href="/story">Continue Reading…</ReadMore>
     </Wrapper>
   );
@@ -44,6 +46,17 @@ const Abstract = styled.p`
   font-size: 1rem;
   margin-bottom: 1em;
   white-space: pre-wrap;
+`;
+
+const TruncatedAbstract = styled(Abstract)`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 8;
+
+  @media ${QUERIES.tabletOnly} {
+    -webkit-line-clamp: 16;
+  }
 `;
 
 const Location = styled.span`
